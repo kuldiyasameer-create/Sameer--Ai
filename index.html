@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>Sameer AI — Starter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">✦</span><div><b>Sameer AI</b><small>All-in-one assistant</small></div></div>
+    <button class="new-chat" id="newChat">＋ नई चैट</button>
+    <p class="side-label">TOOLS</p>
+    <button class="nav active" data-tab="chat">💬 <span>AI Chat</span></button>
+    <button class="nav" data-tab="photo">🖼️ <span>Photo Studio</span></button>
+    <button class="nav" data-tab="three">🧊 <span>3D Text Studio</span></button>
+    <button class="nav" data-tab="website">🌐 <span>Website Builder</span></button>
+    <button class="nav" data-tab="voice">🎙️ <span>Voice Assistant</span></button>
+    <div class="sidebar-note">Starter prototype<br><small>AI services are not connected yet.</small></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><button id="menuBtn" class="mobile-menu" aria-label="Menu">☰</button><div id="topTitle">AI Chat</div><span class="status"><i></i> Demo mode</span></header>
+
+    <section class="panel show" id="chatPanel">
+      <div class="welcome">
+        <div class="sparkle">✦</div>
+        <h1>नमस्ते Sameer! 👋</h1>
+        <p>मैं तुम्हारा AI workspace हूँ। आज क्या बनाना चाहते हो?</p>
+      </div>
+      <div class="quick-grid">
+        <button class="quick" data-prompt="मुझे Parts of Speech आसान हिंदी में समझाओ"><b>📚 पढ़ाई में मदद</b><small>सवाल पूछो और सीखो</small></button>
+        <button class="quick" data-prompt="मेरे लिए एक Instagram पोस्ट का आइडिया बनाओ"><b>🎨 डिजाइन आइडिया</b><small>पोस्टर और क्रिएटिव</small></button>
+        <button class="quick" data-prompt="एक साधारण portfolio website का HTML बनाओ"><b>💻 कोड बनाओ</b><small>वेबसाइट और प्रोजेक्ट</small></button>
+        <button class="quick" data-prompt="मेरे लिए हिंदी में एक दिन का study plan बनाओ"><b>✨ अपना प्लान</b><small>काम व्यवस्थित करो</small></button>
+      </div>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <form id="chatForm" class="composer">
+        <textarea id="chatInput" rows="1" placeholder="यहाँ अपना सवाल लिखो..." aria-label="अपना सवाल लिखें"></textarea>
+        <button type="button" id="micBtn" class="icon-btn" title="Voice input">🎙️</button>
+        <button type="submit" class="send-btn" aria-label="Send">➤</button>
+      </form>
+      <p class="disclaimer">डेमो जवाब केवल उदाहरण हैं। सही AI जवाबों के लिए सुरक्षित backend और AI API जोड़नी होगी।</p>
+    </section>
+
+    <section class="panel" id="photoPanel">
+      <div class="page-heading"><span class="big-icon">🖼️</span><h1>Photo Studio</h1><p>फोटो चुनो और उसका preview देखो। AI editing को बाद में जोड़ा जाएगा।</p></div>
+      <label class="upload-box" for="photoInput"><span>＋</span><b>फोटो चुनें</b><small>JPG, PNG या WebP</small><input id="photoInput" type="file" accept="image/*"></label>
+      <div id="photoPreviewWrap" class="preview-wrap hidden"><img id="photoPreview" alt="Selected photo preview"><button id="clearPhoto" class="secondary">फोटो हटाएँ</button></div>
+      <div class="feature-row"><span>✨ Background बदलना</span><span class="soon">AI कनेक्शन बाकी</span></div>
+      <div class="feature-row"><span>🪄 नई इमेज बनाना</span><span class="soon">AI कनेक्शन बाकी</span></div>
+    </section>
+
+    <section class="panel" id="threePanel">
+      <div class="page-heading"><span class="big-icon">🧊</span><h1>3D Text Studio</h1><p>अपना टेक्स्ट लिखो और 3D-style preview देखो। यह visual demo है।</p></div>
+      <label class="field-label" for="threeText">तुम्हारा टेक्स्ट</label>
+      <input id="threeText" class="text-field" value="SAMEER AI" maxlength="32">
+      <div class="three-preview"><div id="threeOutput">SAMEER AI</div></div>
+      <p class="hint">असली 3D मॉडल, rotation और export के लिए Three.js या अन्य 3D engine जोड़ें।</p>
+    </section>
+
+    <section class="panel" id="websitePanel">
+      <div class="page-heading"><span class="big-icon">🌐</span><h1>Website Builder</h1><p>वेबसाइट का विचार लिखो। डेमो में एक शुरुआती HTML template बनेगा।</p></div>
+      <label class="field-label" for="sitePrompt">किस तरह की वेबसाइट चाहिए?</label>
+      <textarea id="sitePrompt" class="text-field" rows="3" placeholder="जैसे: मेरे लिए car workshop की वेबसाइट बनाओ"></textarea>
+      <button id="makeSite" class="primary">Template बनाओ</button>
+      <pre id="siteCode" class="code-box hidden"></pre>
+      <button id="copyCode" class="secondary hidden">कोड कॉपी करें</button>
+      <p class="hint">यह शुरुआती template है, AI-generated production website नहीं। प्रकाशित करने से पहले code की जाँच करें।</p>
+    </section>
+
+    <section class="panel" id="voicePanel">
+      <div class="page-heading"><span class="big-icon">🎙️</span><h1>Voice Assistant</h1><p>अगर तुम्हारा browser support करता है, तो बोलकर चैट में सवाल डाल सकते हो।</p></div>
+      <button id="startVoice" class="voice-orb">🎙️<span>बोलना शुरू करें</span></button>
+      <p id="voiceStatus" class="voice-status">माइक्रोफोन चालू करने पर browser अनुमति माँग सकता है।</p>
+      <p class="hint">AI का जवाब आवाज़ में सुनाने के लिए Text-to-Speech और असली AI backend जोड़ना होगा।</p>
+    </section>
+    <footer>Sameer AI · Early prototype · Not connected to a live AI model</footer>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
